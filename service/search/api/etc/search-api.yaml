@@ -1,0 +1,19 @@
+Name: search-api
+Host: 0.0.0.0
+Port: 8889
+
+Auth:
+  AccessSecret: Testtest
+  AccessExpire: 3000
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+
+BookRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: book.rpc

@@ -1,0 +1,63 @@
+// add
+type (
+	AddReq {
+		Name  string `json:"name"`
+		Type  string `json:"type"`
+		Count int    `json:"count"`
+	}
+	AddResp {
+		Id int64 `json:"id"`
+	}
+)
+
+// remove
+type (
+	RemoveReq {
+		Id int64 `path:"id"`
+	}
+)
+
+// modify
+type (
+	ModReq {
+		Id    int64  `json:"id"`
+		Name  string `json:"name"`
+		Type  string `json:"type"`
+		Count int    `json:"count"`
+	}
+)
+
+// find
+type (
+	FindByNameReq {
+		Name string `form:"name"`
+	}
+	FindByNameResp {
+		Name  string `json:"name"`
+		Type  string `json:"type"`
+		Count int    `json:"count"`
+	}
+)
+
+@server(
+	jwt: Auth
+	middleware: Logger
+)
+service book-api {
+	@handler add
+	post /book/add (AddReq) returns (AddResp)
+	
+	@handler remove
+	delete /book/remove/:id (RemoveReq) returns ()
+	
+	@handler mod
+	put /book/mod (ModReq) returns ()
+	
+	@handler findByName
+	get /book/findByName (FindByNameReq) returns (FindByNameResp)
+}
+
+service book-api {
+	@handler ping
+	get /book/ping
+}
